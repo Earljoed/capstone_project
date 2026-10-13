@@ -2,28 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simple PHP Greeting</title>
+    <title>Simple Static Greeting</title>
 </head>
 <body>
 
     <h2>Welcome Form</h2>
 
-    <!-- HTML Form that submits to itself -->
-    <form method="POST" action="">
+    <!-- HTML Form -->
+    <form id="greetingForm">
         <label for="name">Enter your name:</label>
         <input type="text" id="name" name="name" required>
         <button type="submit">Submit</button>
     </form>
 
-    <?php
-    // Check if the form has been submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Sanitize the input to prevent XSS
-        $name = htmlspecialchars($_POST['name']);
-        
-        echo "<h3>Hello, $name! Welcome to PHP.</h3>";
-    }
-    ?>
+    <h3 id="greetingOutput"></h3>
+
+    <script>
+        document.getElementById('greetingForm').addEventListener('submit', function(event) {
+            // Prevent the page from actually reloading
+            event.preventDefault();
+            
+            // Get the value from the input field
+            const nameInput = document.getElementById('name').value;
+            
+            // Display the greeting
+            document.getElementById('greetingOutput').innerText = `Hello, ${nameInput}! Welcome to GitHub Pages.`;
+        });
+    </script>
 
 </body>
 </html>
